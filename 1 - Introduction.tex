@@ -1,0 +1,72 @@
+\chapter{Introduction}
+
+\section{Section example}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut massa lorem. Nulla consectetur ultrices risus. Duis in mauris nec justo porttitor porttitor nec quis ligula. Praesent diam sem, lobortis eu arcu id, egestas mattis metus. Suspendisse dapibus, ligula quis sodales dignissim, metus nulla porta elit, sit amet finibus nisi elit a ipsum. Praesent ornare venenatis ante, consequat euismod ipsum dapibus viverra. 
+
+Fusce quam justo, porttitor vel dignissim a, ullamcorper ac turpis. Morbi hendrerit, sapien sed molestie rutrum, magna nulla luctus velit, vel pellentesque libero nunc in neque. In gravida, ligula ac blandit consectetur, eros velit pellentesque odio, ac accumsan dui neque et tortor. Nulla egestas tellus sem, at tempus lectus imperdiet non.\footnote{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AAUtable{side}
+    {
+        A & B & C \\
+        D & e & f \\
+        G & h & i
+    }{Table name} 
+
+Cras sollicitudin, urna vitae pharetra blandit, ligula ipsum ullamcorper nisi, a aliquam sem ligula ut metus. Proin in nibh imperdiet, tincidunt dolor at, vestibulum ante. Pellentesque at nunc tellus. Sed sollicitudin, mauris ac rutrum pellentesque, augue diam maximus urna, sit amet molestie tellus nisi at massa. Mauris malesuada dapibus dui. Sed condimentum nec felis sed mollis. \cite{einstein1905}
+
+\subsection{Subsection example}
+\newDoubleImage
+    {0.45}{Images/placeholder.jpg}{Left description}
+    {0.45}{Images/placeholder.jpg}{Right description}
+
+Nulla a magna in sem aliquet bibendum. Proin pulvinar urna quis ante mollis facilisis. Donec mattis congue ornare. Vivamus fermentum maximus dapibus. Proin vitae enim nulla. Etiam gravida interdum odio in eleifend. Duis mi dolor, consectetur id elementum in, aliquet ut magna. Fusce tempor, lectus id hendrerit lacinia, neque nisl semper libero, vel aliquet felis orci eu lectus. Nullam commodo non lorem at pharetra. Donec pharetra, dui at blandit molestie, nisl nisi semper est, sit amet efficitur nisi mauris congue enim. Donec mattis, quam ac viverra fermentum, ante magna dignissim ante, ut posuere sapien orci sed enim. Quisque porta aliquet erat a convallis. Ut gravida vehicula egestas. Etiam lacus lacus, laoreet vel consectetur vel, semper nec quam. Vivamus vehicula quam nec ligula efficitur, quis posuere dolor aliquam. Etiam id erat ultricies justo aliquet mollis.
+
+\section{Section example}
+
+\newimage{right}{0.5}{Images/placeholder.jpg}{Example image}
+Integer in metus nulla. Nam sed dui semper, ornare libero in, feugiat lacus. Duis sed fermentum turpis. Praesent ultricies congue quam, nec vulputate erat vulputate non. Curabitur libero nibh, imperdiet convallis sodales eget, tempus sit amet odio. Ut vitae gravida augue. Cras eleifend urna arcu, sit amet consectetur purus viverra sit amet. Nullam blandit ex sed metus fermentum laoreet. Praesent consectetur urna orci, ut maximus purus iaculis in. Proin cursus facilisis odio, non rutrum justo elementum vitae. Nunc finibus libero et libero cursus, in rutrum sem pellentesque. Ut interdum ultrices aliquam. Nunc imperdiet mi quis turpis auctor, eget hendrerit justo congue. Suspendisse suscipit augue urna, quis accumsan augue accumsan at.
+
+\subsection{Subsection example}
+
+\subsection{Subsection example}
+
+\subsection{Subsection example}
+
+Sed porta justo sed ligula gravida\ref{tab:moscow:S2}, ac dictum metus gravida. Donec vel quam mauris. Donec sit amet metus nec tellus interdum placerat a nec ex. Morbi euismod mauris eu nisl posuere, a ullamcorper dui tristique. Nam imperdiet bibendum blandit. Cras scelerisque imperdiet aliquet. Praesent auctor ligula ex. Suspendisse vitae tellus dignissim, ultrices eros eget, pretium leo. Vestibulum dignissim porta massa, quis molestie eros vehicula vitae. Morbi fringilla varius justo vel aliquam. Nulla sed tortor dapibus, fermentum augue eget, tempus sem.
+
+\AAUquote{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis ultrices sem. Cras semper est dictum arcu congue, sed mattis lorem dignissim. Nulla risus nisl, ultrices eu risus at, aliquet volutpat ligula}
+
+\AAUquote{Lorem ipsum dolor}
+
+\begin{lstlisting}[language=Java]
+if (Objects.equals(field, "tags")) {
+    if (values.contains("Solsikke")) {
+        List<Activity> result = new ArrayList<>();
+        for (Activity a : ActivityService.getActivities()) {
+            if (a.getTags().contains("Solsikke")) {
+                result.add(a);
+            }
+        }
+        return result;  //comments
+    }
+}
+\end{lstlisting}
+
+\AAUmath{
+    f(x)
+    &= x^2 + 2x + 1 \\
+    &= (x+1)^2
+}
+
+\moscow
+    {Activity; Sign up for an Activity;Cancellation from an Activity}
+    {Status Filtering Feature;Activity Tags Filtering Feature}
+    {Display a Calendar;Downloading a Calendar}
+    {User Registration;Organization Registration}
+
+Requirement \hyperref[tab:moscow:M1]{M1} must ship before \hyperref[tab:moscow:S2]{S2}.
+\ref{tab:moscow:S2}
+
+
+\newpage
+

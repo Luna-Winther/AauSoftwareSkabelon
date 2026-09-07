@@ -1,0 +1,310 @@
+\newcommand{\aautitlepage}[9]{%
+    \newgeometry{left=3cm,right=3cm,top=2.5cm,bottom=2.5cm}
+    \thispagestyle{empty}
+
+    \noindent
+    \begin{minipage}[t]{0.5\textwidth}
+        \vspace{1cm}
+        \includegraphics[width=1\linewidth]{Template/Assets/aau_logo_en.eps}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \vspace{3cm}
+        \raggedleft\sf\small
+        #8
+    \end{minipage}
+    \bigskip
+
+    \noindent
+    \begin{minipage}[t]{0.5\textwidth}
+        \vspace*{2cm}
+        \textbf{Title:}\\ #1\bigskip\par
+        \textbf{Theme:}\\ #2\bigskip\par
+        \textbf{Project Period:}\\ #3\bigskip\par
+        \textbf{Project Group:}\\ #4\bigskip\par
+        \textbf{Participants:}\\ #5\bigskip\par
+        \textbf{Supervisor:}\\ #6\bigskip\par
+        \textbf{Page Numbers:} \pageref{LastPage}\bigskip\par
+        \textbf{Date of Completion:}\\ #7
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \vspace*{2cm}
+        \textbf{Abstract:}\par\medskip
+        \fbox{%
+            \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+                \raggedright\sffamily\small
+                #9
+            \end{minipage}%
+        }
+    \end{minipage}
+
+    \vfill
+    \noindent{\footnotesize\emph{%
+        The content of this report is freely available, but publication
+        (with reference) may only be pursued due to agreement with the author.
+    }}%
+    \restoregeometry\clearpage%
+}
+
+\definecolor{aaunavy}{RGB}{33, 26, 82}
+\newcommand{\aaufrontpage}[4]{
+    \thispagestyle{empty}
+    \vspace*{0.27\textheight}
+    \noindent\hfil\colorbox{aaunavy}{
+      \begin{minipage}{0.9\textwidth}
+        \centering
+        \color{white}
+        \vspace{16pt}
+        {\fontsize{26}{31}\selectfont\bfseries #1}\\[16pt]
+        {\large #2}\\
+        {\large #3}\\
+        {\large #4}
+        \vspace{14pt}
+      \end{minipage}
+    }\hfil
+    \vspace{0.18\textheight}
+    \begin{center}
+        \includegraphics[width=4cm]{Template/Assets/aau_logo_circle_en.eps}
+    \end{center}
+    \vfill
+    \clearpage
+}
+
+\newcommand{\setimagelabel}[1]{
+\StrBehind{#1}{/}[\imagename]
+\StrBefore{\imagename}{.}[\imagename]
+\label{fig:\imagename}
+}
+
+\newcommand{\newimage}[4]{
+    \IfStrEq{#1}{center}{
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=#2\textwidth]{#3}
+            \caption{#4}
+            \setimagelabel{#3}
+        \end{figure}%
+    }{
+        \IfStrEq{#1}{left}{
+            \begin{wrapfigure}{l}{#2\textwidth}
+                \includegraphics[width=\linewidth]{#3}
+                \caption{#4}
+                \setimagelabel{#3}
+            \end{wrapfigure}
+        }{
+            \IfStrEq{#1}{right}{
+                \begin{wrapfigure}{r}{#2\textwidth}
+                    \includegraphics[width=\linewidth]{#3}
+                    \caption{#4}
+                    \setimagelabel{#3}
+                \end{wrapfigure}
+            }{}
+        }
+    }
+}
+
+\newcommand{\newDoubleImage}[6]{%
+    \begin{figure}[htbp]
+        \centering
+        \begin{minipage}[t]{#1\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{#2}
+            \caption{#3}
+            \setimagelabel{#2}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{#4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{#5}
+            \caption{#6}
+            \setimagelabel{#5}
+        \end{minipage}
+    \end{figure}%
+}
+
+\newlength{\quoteWidth}
+\newcommand{\AAUquote}[1]{%
+    \vspace{-0.5em}
+    \settowidth{\quoteWidth}{\textit{\textquotedblleft #1\quotedblbase}}
+    \ifdim\quoteWidth>0.85\textwidth\setlength{\quoteWidth}{0.85\textwidth}\fi
+    \begin{center}
+        \begin{minipage}{\quoteWidth}
+            \centering
+            \linespread{1.2}\selectfont
+            \makebox[\linewidth][c]{\rule{\dimexpr\linewidth+2em\relax}{0.4pt}}
+            \vspace{0.1em}
+            \textit{\textquotedblleft #1\quotedblbase}\strut
+            \vspace{-0.4em}
+            \makebox[\linewidth][c]{\rule{\dimexpr\linewidth+2em\relax}{0.4pt}}
+        \end{minipage}
+    \end{center}
+    \vspace{0.5em}
+}
+
+% Theme selector
+\newcommand{\theme}[1]{
+    \IfStrEq{#1}{sakura}{\themesakura}{
+    \IfStrEq{#1}{clean}{\themeclean}{
+    \IfStrEq{#1}{frost}{\themefrost}{
+    \PackageError{codetheme}
+    {Unknown code theme '#1'}
+    {Available themes are: sakura, clean, frost.}}}}
+}
+
+% MoSCoW
+\ExplSyntaxOn
+\seq_new:N \l_moscow_items_seq
+\int_new:N \l_moscow_counter_int
+\tl_new:N \l_moscow_item_tl
+\tl_new:N \l_moscow_body_tl
+\cs_new_protected:Npn \moscow_category:nn #1#2
+{
+    \seq_set_split:Nnn \l_moscow_items_seq { ; } { #2 }
+    \int_zero:N \l_moscow_counter_int
+    \seq_map_inline:Nn \l_moscow_items_seq
+    {
+        \tl_set:Nn \l_moscow_item_tl { ##1 }
+        \tl_trim_spaces:N \l_moscow_item_tl
+        \tl_if_empty:NF \l_moscow_item_tl
+        {
+            \int_incr:N \l_moscow_counter_int
+            \tl_put_right:Nx \l_moscow_body_tl
+            {
+                #1 \int_use:N \l_moscow_counter_int
+                &
+                \l_moscow_item_tl
+                \exp_not:N \label { tab:moscow:#1 \int_use:N \l_moscow_counter_int }
+                \exp_not:N \\
+                \exp_not:N \hline
+            }
+        }
+    }
+}
+ 
+\NewDocumentCommand{\moscow}{mmmm}
+{
+    \tl_clear:N \l_moscow_body_tl
+    \moscow_category:nn { M } { #1 }
+    \moscow_category:nn { S } { #2 }
+    \moscow_category:nn { C } { #3 }
+    \moscow_category:nn { W } { #4 }
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \rowcolors{2}{tablebg}{tablealt}
+        \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|p{10cm}|}
+            \hline
+            \rowcolor{tableheader}
+            \textbf{Priority} & \textbf{Requirement} \\
+            \hline
+            \l_moscow_body_tl
+        \end{tabular}
+        \caption{MoSCoW~Model}
+        \label{tab:moscow}
+    \end{table}
+}
+\ExplSyntaxOff
+
+\newcommand{\AAUmathblock}[1]{%
+    \par\vspace{0.5em}
+    \noindent
+    \colorbox{mathbackground}{%
+        \begin{minipage}{\dimexpr\textwidth-2\fboxsep\relax}
+            \setlength{\parindent}{0pt}
+            \hspace{0.5em}%
+            \textcolor{mathaccent}{\rule{2pt}{2.2em}}%
+            \hspace{0.8em}%
+            $\displaystyle
+                \begin{aligned}
+                    #1
+                \end{aligned}
+            $
+        \end{minipage}%
+    }
+    \par\vspace{0.5em}
+}
+
+\newcommand{\AAUmath}[1]{%
+    \begin{equation}
+        \begin{aligned}
+            #1
+        \end{aligned}
+    \end{equation}
+}
+
+\ExplSyntaxOn
+
+\NewDocumentCommand{\AAUtable}{m +m m}
+{
+    \begin{table}
+        \centering
+
+        \str_case:nnF { #1 }
+        {
+            {noheader}
+            {
+                \begin{tblr}{
+                    row{odd}  = {bg=tablebg},
+                    row{even} = {bg=tablealt},
+                    hline{1-Z} = {0.4pt},
+                    vline{1-Z} = {0.4pt},
+                }
+                    #2
+                \end{tblr}
+            }
+
+            {header}
+            {
+                \begin{tblr}{
+                    row{1} = {
+                        bg=tableheader,
+                        font=\bfseries,
+                    },
+                    row{2} = {bg=tablebg},
+                    row{3,5,...} = {bg=tablealt},
+                    hline{1} = {1.2pt},
+                    hline{2} = {0.8pt},
+                    hline{3-Z} = {0.4pt},
+                    vline{1-Z} = {0.4pt},
+                }
+                    #2
+                \end{tblr}
+            }
+
+            {side}
+            {
+                \begin{tblr}{
+                    row{1} = {
+                        bg=tableheader,
+                        font=\bfseries,
+                    },
+                    column{1} = {
+                        bg=tableheader,
+                        font=\bfseries,
+                    },
+                    row{2} = {bg=tablebg},
+                    row{3,5,...} = {bg=tablealt},
+                    hline{1} = {1.2pt},
+                    hline{2} = {0.8pt},
+                    hline{3-Z} = {0.4pt},
+                    vline{1} = {1.2pt},
+                    vline{2-Z} = {0.4pt},
+                }
+                    #2
+                \end{tblr}
+            }
+        }
+        {
+            \PackageError{AAUtable}
+                {Unknown~table~mode~'#1'}
+                {Use~'noheader',~'header',~or~'side'.}
+        }
+
+        \tl_if_blank:nF { #3 }
+        {
+            \caption{#3}
+        }
+
+    \end{table}
+}
+
+\ExplSyntaxOff

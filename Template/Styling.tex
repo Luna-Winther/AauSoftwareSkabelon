@@ -1,0 +1,173 @@
+% Document Structure
+\addbibresource{ZZ - Bibliography.bib}
+\newcommand{\makefrontmatter}{
+    \input{0.1 - Frontpage}
+    \input{0.2 - Titlepage}
+    \tableofcontents
+}
+\newcommand{\makebackmatter}{
+    \printbibliography[
+        heading=bibintoc,
+        title=Bibliography
+    ]
+    \appendix
+    \input{Appendix}
+}
+
+% Page formatting
+\setlength{\headheight}{14pt}
+\renewcommand{\footnoterule}{}
+\pagestyle{fancy}
+\fancyhead[LO]{\small\nouppercase\leftmark} % chapter title
+\fancyhead[R]{\thepage} % page number
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}
+
+% Heading formatting
+\titleformat{\chapter}[display]{\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter}{0pt}{\Huge}
+\titleformat*{\section}{\normalfont\Large\bfseries}
+\titleformat*{\subsection}{\normalfont\large\bfseries}
+\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
+
+% Body text
+\linespread{1.05}
+\setlength{\parskip}{12pt}
+\setlength{\parindent}{15pt}
+
+% Heading spacing
+\titlespacing*{\chapter}{0pt}{0pt}{10pt}
+\titlespacing*{\section}{0pt}{20pt}{0pt}
+\titlespacing*{\subsection}{0pt}{15pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{0pt}
+
+%background image
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \includegraphics[width=\paperwidth,height=\paperheight]{aau_waves.pdf}%
+  }%
+}
+
+%Table of Contents
+\setlength{\cftbeforetoctitleskip}{10pt}
+\setlength{\cftaftertoctitleskip}{20pt}
+\renewcommand{\contentsname}{Table of Contents}
+\setcounter{tocdepth}{2} % maybe change to 1.
+\setlength{\cftbeforechapskip}{10pt}
+\setlength{\cftbeforesecskip}{5pt}
+
+
+%Appendix
+\let\oldappendix\appendix
+\renewcommand{\appendix}{%
+    \clearpage
+    \oldappendix
+    \renewcommand{\thechapter}{Appendix~\Alph{chapter}}%
+    \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter}}{}}%
+    \addtocontents{toc}{\protect\renewcommand{\protect\cftchapnumwidth}{6em}}%
+    \pagestyle{appendix}
+    \titleformat{\chapter}[display]
+        {\normalfont\Huge\bfseries}
+        {{\thechapter}}
+        {10pt}
+        {\Huge}
+}
+\fancypagestyle{appendix}{%
+    \fancyhf{}
+    \fancyhead[R]{\thepage}
+    \fancyhead[L]{\leftmark}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\lstset{
+    backgroundcolor=\color{codeBackground},
+    frame=single,
+    rulecolor=\color{codeFrame},
+    framerule=0.8pt,
+    framesep=6pt,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codeKeyword}\bfseries,
+    stringstyle=\color{codeString},
+    commentstyle=\color{codeComment}\itshape,
+    numberstyle=\tiny\color{gray},
+    identifierstyle=\color{black},
+    numbers=left,
+    numbersep=8pt,
+    xleftmargin=2em,
+    framexleftmargin=1.5em,
+    framextopmargin=4pt,
+    framexbottommargin=4pt
+}
+
+
+% ============================================================
+%                         THEMES
+% ============================================================
+
+% ------------------------------------------------------------
+% Sakura
+% ------------------------------------------------------------
+\newcommand{\themesakura}{
+    % --- Code ---
+    \definecolor{codeKeyword}{RGB}{190,61,105}
+    \definecolor{codeString}{RGB}{69,119,91}
+    \definecolor{codeComment}{RGB}{145,125,134}
+    \definecolor{codeNumber}{RGB}{126,91,145}
+    \definecolor{codeBackground}{RGB}{253,248,250}
+    \definecolor{codeFrame}{RGB}{232,213,221}
+
+    % --- Tables ---
+    \definecolor{tableheader}{RGB}{232,213,221}
+    \definecolor{tablealt}{RGB}{253,248,250}
+    \definecolor{tablebg}{RGB}{255,255,255}
+
+    % --- Math ---
+    \definecolor{mathaccent}{RGB}{190,61,105}
+    \definecolor{mathbackground}{RGB}{253,248,250}
+}
+
+
+% ------------------------------------------------------------
+% Clean
+% ------------------------------------------------------------
+\newcommand{\themeclean}{
+    % --- Code ---
+    \definecolor{codeKeyword}{RGB}{175,0,219}
+    \definecolor{codeString}{RGB}{163,21,21}
+    \definecolor{codeComment}{RGB}{0,128,0}
+    \definecolor{codeNumber}{RGB}{9,134,88}
+    \definecolor{codeBackground}{RGB}{255,255,255}
+    \definecolor{codeFrame}{RGB}{220,220,220}
+
+    % --- Tables ---
+    \definecolor{tableheader}{RGB}{220,220,220}
+    \definecolor{tablealt}{RGB}{248,248,248}
+    \definecolor{tablebg}{RGB}{255,255,255}
+
+    % --- Math ---
+    \definecolor{mathaccent}{RGB}{80,80,80}
+    \definecolor{mathbackground}{RGB}{248,248,248}
+}
+
+
+% ------------------------------------------------------------
+% Frost
+% ------------------------------------------------------------
+\newcommand{\themefrost}{
+    % --- Code ---
+    \definecolor{codeKeyword}{RGB}{82,74,148}
+    \definecolor{codeString}{RGB}{35,112,85}
+    \definecolor{codeComment}{RGB}{105,112,120}
+    \definecolor{codeNumber}{RGB}{166,91,45}
+    \definecolor{codeBackground}{RGB}{248,249,250}
+    \definecolor{codeFrame}{RGB}{210,214,220}
+
+    % --- Tables ---
+    \definecolor{tableheader}{RGB}{210,214,220}
+    \definecolor{tablealt}{RGB}{248,249,250}
+    \definecolor{tablebg}{RGB}{255,255,255}
+
+    % --- Math ---
+    \definecolor{mathaccent}{RGB}{82,74,148}
+    \definecolor{mathbackground}{RGB}{248,249,252}
+}
